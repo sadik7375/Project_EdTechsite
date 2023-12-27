@@ -104,4 +104,15 @@ class FooterController extends Controller
         session()->flash('success', 'Footer Data Successfully Deleted');
         return back();
     }
+
+
+//*user profile show */
+
+public function userprofile()
+{
+    return view('userprofile');
+}
+
+
+
 }

@@ -14,7 +14,8 @@ class showBuyCourses extends Controller
         $purchasedCourses = $user->orders()->where('status', 'Processing')->get();
 
 
-        return view('userprofile.userprofile', compact('user', 'purchasedCourses'));
+
+        return view('userprofile.usercourse', compact('user', 'purchasedCourses'));
         // // dd( compact('user', 'purchasedCourses'));
 
     }

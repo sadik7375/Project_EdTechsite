@@ -36,7 +36,7 @@
         </li>
     @else
         <li class="nav-item">
-            <a class="nav-link" href="">Profile</a>
+            <a class="nav-link" href="{{route('userprofile')}}">Profile</a>
         </li>
     @endif
                     <li class="nav-item">

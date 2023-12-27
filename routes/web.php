@@ -31,12 +31,15 @@ Route::get('test', function () {
 });
 
 // ------------------------------------user profile route-------------------------
-// Route::get('userprofile', [FrontController::class, 'userprofile'])->name('userprofile')->middleware('userprofile');;
+Route::get('userprofile', [FrontController::class, 'userprofile'])->name('userprofile')->middleware('userprofile');
 
-Route::get('userprofile', [showBuyCourses::class, 'index']);
+//-------------------------------------user course show----------------------------
+Route::get('usercourse', [showBuyCourses::class, 'index'])->name('usercourse');
+
+// Route::get('usercourse', [FrontController::class, 'usercourse']);
 
 
-
+//--------------------------------------------------------------------------------------
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
