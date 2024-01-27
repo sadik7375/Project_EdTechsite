@@ -17,11 +17,15 @@ class CreateTeamsTable extends Migration
             $table->id();
             $table->string("name");
             $table->string("image");
+            $table->string("institution");
             $table->string("profession");
+            $table->string('email');
+            $table->unsignedBigInteger('login_id');
             $table->string("expertise");
             $table->string("category");
             $table->string("address");
             $table->string("user_id");
+            $table->string("t_id");
             $table->timestamps();
         });
     }

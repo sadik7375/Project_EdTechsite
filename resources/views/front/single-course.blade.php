@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,7 +126,7 @@
                     <div class="card third-section-learning-box" style="width: auto">
                         <div class="card-body">
                             <h5 class="third-section-learning-box_p1">Intermediate</h5>
-                                {!! $course->intermediate !!}
+                            {!! $course->intermediate !!}
                         </div>
                     </div>
                 </div>
@@ -186,5 +189,5 @@
         });
     });
 
-</body>
-</html>
+    </body>
+    </html>

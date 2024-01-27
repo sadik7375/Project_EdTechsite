@@ -5,22 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\admin\Course;
-use App\Models\User;
+
 class Orders extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
-        'name', 'email', 'phone', 'amount', 'status', 'transaction_id', 'currency',
-
+        'user_id', 'amount', 'status', 'course_ID', 'transaction_id', 'currency',
     ];
-    public function course()
+
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class, 'user_id');
+    // }
+
+
+    public function course(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Course::class, 'course_id','id');
     }
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class,'email','email');
     }
-
 }

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Blank</title>
+    <title>Admin Panel Studybhai</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -20,6 +20,12 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.css">
+
+    <!-- DataTables JS    // ------------for student/employee table in dashboard---------------->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.js"></script>
+
 
     <script src="https://cdn.tiny.cloud/1/3jyy1zmqqq1lgcadurv15vtpzdvttvplxnvgtpjqjicmj1h5/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>
@@ -30,12 +36,6 @@
 </head>
 
 <body id="page-top">
-
-
-
-
-
-
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -43,27 +43,6 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    {{-- <i class="fas fa-laugh-wink"></i> --}}
-                </div>
-                <div class="sidebar-brand-text mx-3">Admin Panel</div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-
-                <a class="nav-link" href="{{ url('/') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Home</span></a>
-
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -71,7 +50,12 @@
 
             {{-- --------------------------------------- admin navbar --------------------------------------- --}}
 
+            @if(auth()->user()->role === 'a')
             <x-admin.sidebar></x-admin.sidebar>
+        @elseif(auth()->user()->role === 't')
+            <x-trainer.sidebar></x-trainer.sidebar>
+        @endif
+
 
             {{-- --------------------------------------- admin navbar --------------------------------------- --}}
 
@@ -379,11 +363,10 @@
 {{--    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>--}}
 {{--    <script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>--}}
 {{--    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>--}}
-
     <script src="{{ asset('assets/scripts/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/scripts/dataTables.rowReorder.min.js') }}"></script>
     <script src="{{ asset('assets/scripts/dataTables.responsive.min.js') }}"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         $(document).ready(function() {
             // $('#example').DataTable();
@@ -425,7 +408,69 @@
             // menubar: 'table',
         });
     </script>
+{{----------------------------Scripts for showing chart area in admin dashboard----------- --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Sample data for charts
+            var areaChart1Data = {
+                labels: ['January', 'February', 'March', 'April', 'May'],
+                datasets: [{
+                    label: 'Example Data',
+                    backgroundColor: 'rgba(75,192,192,0.4)',
+                    borderColor: 'rgba(75,192,192,1)',
+                    data: [65, 59, 80, 81, 56]
+                }]
+            };
 
+            // Placeholder data for Area Chart 2
+            var areaChart2Data = {
+                labels: ['Label1', 'Label2', 'Label3', 'Label4', 'Label5'],
+                datasets: [{
+                    label: 'Example Data',
+                    backgroundColor: 'rgba(255,99,132,0.4)',
+                    borderColor: 'rgba(255,99,132,1)',
+                    data: [50, 75, 60, 45, 80]
+                }]
+            };
+
+            // Placeholder data for Bar Chart 1
+            var barChart1Data = {
+                labels: ['Category1', 'Category2', 'Category3', 'Category4', 'Category5'],
+                datasets: [{
+                    label: 'Example Data',
+                    backgroundColor: 'rgba(255,99,71,0.7)',
+                    borderColor: 'rgba(255,99,71,1)',
+                    borderWidth: 1,
+                    data: [30, 45, 60, 75, 90]
+                }]
+            };
+
+            // Area Chart 1
+            var ctxAreaChart1 = document.getElementById('myAreaChart1').getContext('2d');
+            new Chart(ctxAreaChart1, {
+                type: 'line',
+                data: areaChart1Data
+            });
+
+            // Area Chart 2
+            var ctxAreaChart2 = document.getElementById('myAreaChart2').getContext('2d');
+            new Chart(ctxAreaChart2, {
+                type: 'line',
+                data: areaChart2Data
+            });
+
+            // Bar Chart 1
+            var ctxBarChart1 = document.getElementById('myBarChart1').getContext('2d');
+            new Chart(ctxBarChart1, {
+                type: 'bar',
+                data: barChart1Data
+            });
+        });
+        // ------------for student/employee table in dashboard--------------
+        $(document).ready(function() {
+            $('#datatablesSimple').DataTable();
+        });
+    </script>
 
 </body>
 

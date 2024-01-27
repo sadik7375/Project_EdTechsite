@@ -1,45 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>studybhai</title>
+@extends('userprofile.umain')
 
-    <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+@section('content')
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            <div class="container-fluid">
+                <div class="profile-container">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="purchasedCoursesTable">
+                            <thead>
+                            <tr>
+                                <th>Serial</th>
+                                <th>Title</th>
+                                <th>Duration</th>
+                                <th>Image</th>
+                                <th>Price</th>
+                                <th>Transaction ID</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $id = 0; ?>
+                            @foreach ($purchasedCourses as $course)
 
-    <script src="https://cdn.tiny.cloud/1/3jyy1zmqqq1lgcadurv15vtpzdvttvplxnvgtpjqjicmj1h5/tinymce/6/tinymce.min.js"
-            referrerpolicy="origin"></script>
-
-    <!-- Custom styles for this template-->
-    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
-</head>
-<body>
-
-
-
-<div class="profile-container">
-    <h3>Hello, {{ $user->name }}</h3>
-    <h4>Purchased Courses:</h4>
-    @foreach ($purchasedCourses as $course)
-        <div class="course-card">
-            <a href="#">{{ \App\Models\admin\Course::find($course->course_id)->first()->title ?? "No Data Found" }}</a>
-            <div class="course-card">
-                Price: {{ $course->amount }}
+                                <tr>
+                                        <?php $courseDetails = \App\Models\admin\Course::find($course->course_id)?>
+                                    <td>{{ ++$id }}</td>
+                                    <td>{{ optional($courseDetails)->title ?? "No Data Found" }}</td>
+                                    <td>{{ optional($courseDetails)->duration ?? "No Data Found" }}</td>
+                                    <td>
+                                        <img src="{{ optional($courseDetails)->image ? asset('storage/'.$courseDetails->image) : 'no-image.jpg' }}" alt="" class="img-fluid" style="max-width: 100px; height: auto;">
+                                    </td>
+                                    <td>{{ $course->amount }}</td>
+                                    <td>{{ $course->transaction_id }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
 
-    @endforeach
-</div>
-
-
-
-</body>
-</html>
+@endsection

@@ -28,15 +28,71 @@ class FrontController extends Controller
     }
 
 
-    public function userprofile()
-    {
-        return view('userprofile.userprofile');
+     public function showcourses(){
+
+        $courses = Course::all();
+        return view("course.allcourseShow", compact('courses'));
+
+
+
     }
+
+
+
+    public function assigncourseAndtrainerAssign(){
+
+        $trainers = Team::all();
+        return view("admin.admin-content.assigncourse.assign", compact('trainers'));
+    }
+
+
+    public function userprofile()
+    {   $user = auth()->user();
+
+
+        if ($user) {
+        return view('userprofile.userprofile');
+        }
+        else{
+            return redirect()->route('login'); // or any other action
+
+        }
+    }
+
+
 
     public function usercourse()
     {
         return view('userprofile.usercourse');
     }
+
+
+    public function usersettings()
+    {
+        return view('userprofile.settings');
+    }
+
+
+    public function usereditProfile()
+    {   $user = auth()->user();
+
+
+        if ($user) {
+        return view('userprofile.editProfile');
+        }
+        else{
+            return redirect()->route('login');
+
+        }
+    }
+
+
+    public function trainerProfile()
+    {
+        return view('trainerprofile.trainerprofile');
+
+    }
+
 
 
 

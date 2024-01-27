@@ -19,10 +19,11 @@
             <th>Serial</th>
             <th>Title</th>
             <th>Duration</th>
-            <th>image</th>
+            <th>Image</th>
             <th>Price</th>
             <th>Update</th>
             <th>Delete</th>
+            <th>Assign trainer</th>
         </tr>
         </thead>
         <tbody>
@@ -44,6 +45,17 @@
                         <input type="submit" value="Delete" class="btn btn-danger">
                     </form>
                 </td>
+
+                <td>
+                    <form action="{{ route('courseassign',['course_id'=>$course->id]) }}" method="GET">
+                        {{ csrf_field() }}
+
+                        <input type="submit" value="assign course" class="btn btn-secondary">
+                    </form>
+                </td>
+
+
+
             </tr>
         @endforeach
         </tbody>

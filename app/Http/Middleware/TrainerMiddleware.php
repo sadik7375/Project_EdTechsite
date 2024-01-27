@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class UserprofileMiddleware
+class TrainerMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,11 @@ class UserprofileMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->email != null){
+        if (auth()->check() && auth()->user()->role === 't') {
             return $next($request);
         }else{
             abort(404);
         }
     }
+
 }

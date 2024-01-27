@@ -17,6 +17,7 @@
                 <th>Serial</th>
                 <th>Name</th>
                 <th>Image</th>
+
                 <th>Profession</th>
                 <th>Expertise</th>
                 <th>Address</th>
@@ -33,6 +34,7 @@
                     <td>{{ $id += 1 }}</td>
                     <td>{!! $team->name !!}</td>
                     <td><img src="{{ asset('storage/' . $team->image) }}" alt="" style="width: 100px"></td>
+
                     <td>{{ $team->profession }}</td>
                     <td>{{ $team->expertise }}</td>
                     <td>{{ $team->address }}</td>
